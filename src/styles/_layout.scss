@@ -1,0 +1,79 @@
+@use "variables" as v;
+@use "mixins" as m;
+
+html, body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background-color: v.$background-white;
+}
+
+// .header {
+// 	width: 100%;
+
+// 	&__background {
+// 		background-color: v.$background-dark-color;
+// 		text-align: center;
+// 		padding: 22px;
+// 		height: 120px;
+// 		display: flex;
+		
+// 		justify-content: center;
+// 		align-items: center;
+// 	}
+
+// 	&__title {
+// 		display: block;
+// 		font-size: 64px;
+// 		color: v.$white-color;
+// 		padding: 0px 30px;
+
+// 		@include m.respond-to("md") {
+// 			font-size: 47px;
+// 			line-height: 33px;
+// 		}
+	
+// 		@include m.respond-to("sm") {
+// 			font-size: 30px;
+// 			line-height: 33px;
+// 		}
+// 	}
+// }
+
+// main {
+// 	flex: 1 1 auto;
+// 	width: 100%;
+// }
+
+// .main__container {
+// 	height: 100%;
+// }
+
+.footer {
+	width: 100%;
+
+	&__background {
+		background-color: v.$background-dark-color;
+		text-align: center;
+		padding: 10px;
+	}
+
+	&__copyright {
+		font-size: 16px;
+		color: v.$white-color;
+	}
+}
+
+// a.thanks {
+// 	font-size: 12px;
+// 		color: v.$white-color;
+// }
+
+// a.thanks:visited {
+// 	color: inherit;
+// }
