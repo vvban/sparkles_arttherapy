@@ -4,6 +4,7 @@ window.onload = function () {
 	let deck_id = "set1";
 	let set_size = 8;
 	let number_of_deck = 5;
+	const currentUrl = window.location.origin;
 
 	let image_id_array = []
 
@@ -123,7 +124,7 @@ window.onload = function () {
 		for (let index = 1; index <= number_of_deck; index++) {
 			let deck_name = "set" + index
 			
-			fetch('/assets/' + deck_name + "/description.txt")
+			fetch(currentUrl + '/assets/' + deck_name + "/description.txt")
 				.then(response => response.text())
 				.then((data) => {
 					build_deck_profile(deck_name, data)
