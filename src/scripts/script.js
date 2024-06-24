@@ -123,7 +123,7 @@ window.onload = function () {
 		for (let index = 1; index <= number_of_deck; index++) {
 			let deck_name = "set" + index
 			
-			fetch('http://localhost:3000/assets/' + deck_name + "/description.txt")
+			fetch('/assets/' + deck_name + "/description.txt")
 				.then(response => response.text())
 				.then((data) => {
 					build_deck_profile(deck_name, data)
