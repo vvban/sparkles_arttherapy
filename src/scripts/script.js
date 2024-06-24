@@ -1,9 +1,14 @@
 window.onload = function () {
 	let is_flip = false;
+	let is_deck_cards_modal_open = false;
 	let set_id = "set2";
 	let set_size = 8;
 
 	let image_id_array = []
+
+
+	let deck_cards_modal = document.getElementById("deck-of-cards-modal");
+	let deck_cards_modal_close_button = document.getElementById("deck-of-cards-modal-button-close");
 
 
 	let cards_desk = document.getElementById("cards-desk");
@@ -64,6 +69,17 @@ window.onload = function () {
 		document.querySelectorAll("#cards-line div").forEach ( block => {
 			block.setAttribute("data-flip", is_flip.toString())
 		})
+	})
+
+	choose_deck_button.addEventListener("click", function() {
+		is_deck_cards_modal_open = !is_deck_cards_modal_open
+
+		deck_cards_modal.setAttribute("data-open", is_deck_cards_modal_open)
+	})
+
+	deck_cards_modal_close_button.addEventListener("click", function() {
+		is_deck_cards_modal_open = false
+		deck_cards_modal.setAttribute("data-open", is_deck_cards_modal_open)
 	})
 
 	function mix_image_id_array() {

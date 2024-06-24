@@ -32,13 +32,20 @@
 		</header>
 		<main>
 			<div class="main__container">
-				<div class="deck-of-cards-modal">
-					<!-- TODO: write -->
+				<div class="deck-of-cards-modal" data-open = "false" id="deck-of-cards-modal">
+					<div class="deck-of-cards-modal__container">
+						<p class="deck-of-cards-modal__title">Choose your deck</p>
+						<div class="deck-of-cards-modal__decks-list" id="decks-list">
+							<!-- add decks in dynamic way -->
+						</div>
+						<button class="deck-of-cards-modal__button_close" id="deck-of-cards-modal-button-close">Close</button>
+					</div>
 				</div>
 				<div class="cards-desk" id="cards-desk">
 					<!-- add cards in dynamic way -->
 				</div>
 				<div class="panel">
+
 					<div class="panel__action">
 						<div id="mix-cards-button">
 							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.6665 5C8.33317 5 8.33317 15 14.9998 15" stroke="#343641" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M14.9998 5C8.33317 5 8.33317 15 1.6665 15" stroke="#343641" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M15 11.6333V18.3L19.1667 14.9666L15 11.6333Z" fill="#343641"></path><path d="M15 1.66675V8.33339L19.1667 5.00006L15 1.66675Z" fill="#343641"></path></svg>
