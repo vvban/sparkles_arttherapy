@@ -1,4 +1,0 @@
-RewriteEngine on
-RewriteCond %{REQUEST_URI} !^/dist/page.html$
-RewriteCond %{REQUEST_URI} !\.(gif|jpe?g|png|css|js)$
-RewriteRule .* /dist/page.html [L,R=302]
