@@ -22,24 +22,56 @@ window.onload = function () {
 	let clear_desk_button = document.getElementById("clear-desk-button");
 
 	function createSet() {
-		for (const index in image_id_array) {
-			let block = document.createElement("div")
-			let card = document.createElement("span")
-
-			block.setAttribute("data-flip", is_flip.toString())
-			
-			card.style.backgroundImage = "url(\"/assets/" + deck_id + "/" + image_id_array[index].toString() + ".png\")";
-
-			block.appendChild(card)
-			
-			cards_line.appendChild(block)
+		for (let i = 0; i < image_id_array.length; i++) {
+			moveCardToDeck(image_id_array[i])
 		}
 	}
 
-	function build_new_set() {
+	function moveCardToDesk(card_id) {
+		let block = document.createElement("div")
+		let card = document.createElement("span")
+
+		block.setAttribute("data-card-id", card_id.toString())
+		
+		card.style.backgroundImage = "url(\"/assets/" + deck_id + "/" + card_id + ".png\")";
+
+		block.appendChild(card)
+
+		block.addEventListener("click", function() {
+			block.remove() // TODO: set timer
+			moveCardToDeck(card_id)
+			image_id_array.push(card_id)
+		})
+
+		cards_desk.appendChild(block)
+	}
+
+	function moveCardToDeck(card_id) {
+		let block = document.createElement("div")
+		let card = document.createElement("span")
+
+		block.setAttribute("data-flip", is_flip.toString())
+		block.setAttribute("data-card-id", card_id.toString())
+		
+		card.style.backgroundImage = "url(\"/assets/" + deck_id + "/" + card_id.toString() + ".png\")";
+
+		block.appendChild(card)
+
+		block.addEventListener("click", function() {
+			let index = image_id_array.indexOf(card_id)
+			let temp = image_id_array.slice(0,index).concat(image_id_array.slice(index+1,image_id_array.length))
+			image_id_array = temp
+			block.remove() // TODO: set timer
+			moveCardToDesk(card_id)
+		})
+		
+		cards_line.appendChild(block)
+	}
+
+	function build_new_deck() {
 		clear_deck()
 		image_id_array = [...Array(set_size+1).keys()];
-		delete image_id_array[0]
+		image_id_array = image_id_array.slice(1, set_size+1)
 		createSet()
 	}
 
@@ -51,11 +83,11 @@ window.onload = function () {
 		cards_line.innerHTML = ""
 	}
 
-	build_new_set()
+	build_new_deck()
 
 	clear_desk_button.addEventListener("click", function() {
 		clear_desk()
-		build_new_set()
+		build_new_deck()
 	})
 
 	mix_cards_button.addEventListener("click", function() {
@@ -112,7 +144,8 @@ window.onload = function () {
 			button.textContent = "Use"
 			button.addEventListener("click", function() {
 				deck_id = button.parentElement.getAttribute("data-deck-name")
-				build_new_set()
+				clear_desk()
+				build_new_deck()
 				close_deck_cards_modal()
 				window.scrollTo(0, document.body.scrollHeight);
 			})
@@ -129,14 +162,15 @@ window.onload = function () {
 	build_decks()
 
 	function mix_image_id_array() {
-		const createRandomNumbers = (min, max) => {
-			const randomNumbers = new Set();
-			const range = max - min + 1;
-			while (randomNumbers.size < range) {
-				randomNumbers.add(Math.floor(Math.random() * range) + min);
+		const suffle = (array) => {
+			for (let i = array.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[array[i], array[j]] = [array[j], array[i]];
 			}
-			return Array.from(randomNumbers);
+			return array
 		};
-		image_id_array = createRandomNumbers(1, set_size); // Adjust min and max as needed
+
+		let temp = suffle(image_id_array); // Adjust min and max as needed
+		image_id_array = temp
 	}
 };
