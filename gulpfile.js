@@ -69,7 +69,7 @@ function styles() {
   //.pipe(stylus())
   .pipe(sass().on('error', sass.logError))
   .pipe(autoprefixer({
-    cascade: false
+    cascade: true
   }))
   .pipe(cleanCSS({
     level: 2

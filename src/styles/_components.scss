@@ -30,10 +30,11 @@
 		justify-content: center;
 		background-color: rgba(255,255,255,0.2);
 		padding: 25px 5px;
-		border-radius: 9px 9px 0px 0px;
+		border-radius: 4px;
 	
 		@include m.respond-to("lg") {
 			flex-direction: column;
+			align-items: center;
 		}
 
 		div {
@@ -47,9 +48,11 @@
 			background-color: v.$white-color;
 			margin-right: 15px;
 			transition: ease 0.5s;
-	
+			
 			@include m.respond-to("lg") {
 				margin: 10px 15px;
+				max-width: 80%;
+				width: 100%;
 			}
 			
 			&, > * {
@@ -77,7 +80,7 @@
 
 	&__cards-line {
 		width: 100%;
-		margin-top: 35px;
+		padding-top: 35px;
 		display: flex;
 		justify-content: left;
 		flex-direction: row;
@@ -85,6 +88,9 @@
 		overflow-x: scroll;
 		padding-bottom: 20px;
 		flex-wrap: nowrap;
+		min-height: 245px;
+		box-sizing: border-box;
+		perspective: 900px;
 
 		div {
 			box-sizing: content-box;
@@ -93,7 +99,32 @@
 			border-radius: 10px;
 			margin: 0px 5px;
 			background-color: white;
-			cursor: pointer;	
+			cursor: pointer;
+			position: relative;
+			transform-style: preserve-3d;
+			transition: transform ease 1s;
+
+			&, &::before {
+				backface-visibility: hidden;
+			}
+
+			&::before {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 100%;
+				transform-style: preserve-3d;
+				background-color: red;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				border-radius: 10px;
+				transform: rotateY(180deg);
+			}
+		}
+
+		div[data-flip="true"] {
+			transform: rotateY(180deg);
 		}
 
 		span {

@@ -1,24 +1,81 @@
 window.onload = function () {
-	let is_fllip = false;
+	let is_flip = false;
 	let set_id = "set2";
-	let set_size = 3;
+	let set_size = 8;
 
+	let image_id_array = []
+
+
+	let cards_desk = document.getElementById("cards-desk");
 	let cards_line = document.getElementById("cards-line");
 
-	createSet()
+	let mix_cards_button = document.getElementById("mix-cards-button");
+	let flip_cards_button = document.getElementById("flip-cards-button");
+	let choose_deck_button = document.getElementById("choose-deck-button");
+	let clear_desk_button = document.getElementById("clear-desk-button");
 
 	function createSet() {
-		for (let index = 1; index <= set_size; index++) {
+		for (const index in image_id_array) {
 			let block = document.createElement("div")
 			let card = document.createElement("span")
+
+			block.setAttribute("data-flip", is_flip.toString())
 			
-			card.style.backgroundImage = "url(\"/assets/" + set_id + "/" + index.toString() + ".png\")";
+			card.style.backgroundImage = "url(\"/assets/" + set_id + "/" + image_id_array[index].toString() + ".png\")";
 
 			block.appendChild(card)
 			
 			cards_line.appendChild(block)
 		}
+	}
 
+	function build_new_set() {
+		clear_set()
+		image_id_array = [...Array(set_size+1).keys()];
+		delete image_id_array[0]
+		createSet()
+	}
+
+	function clear_desk() {
+		cards_desk.innerHTML = ""
+	}
+
+	function clear_set() {
+		cards_line.innerHTML = ""
+	}
+
+	build_new_set()
+
+	clear_desk_button.addEventListener("click", function() {
+		clear_desk()
+		build_new_set()
+	})
+
+	mix_cards_button.addEventListener("click", function() {
+		clear_set()
+		mix_image_id_array()
+		createSet()
+		console.log(image_id_array)
+	})
+
+	flip_cards_button.addEventListener("click", function() {
+		is_flip = !is_flip
+
+		document.querySelectorAll("#cards-line div").forEach ( block => {
+			block.setAttribute("data-flip", is_flip.toString())
+		})
+	})
+
+	function mix_image_id_array() {
+		const createRandomNumbers = (min, max) => {
+			const randomNumbers = new Set();
+			const range = max - min + 1;
+			while (randomNumbers.size < range) {
+				randomNumbers.add(Math.floor(Math.random() * range) + min);
+			}
+			return Array.from(randomNumbers);
+		};
+		image_id_array = createRandomNumbers(1, set_size); // Adjust min and max as needed
 	}
 
 	// let game_toggle = false;
