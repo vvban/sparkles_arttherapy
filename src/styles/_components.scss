@@ -1,6 +1,67 @@
 @use "variables" as v;
 @use "mixins" as m;
 
+.deck-of-cards-modal {
+
+}
+
+.desk {
+	width: 100%;
+	height: 300px;
+	background-image: url("/dist/img/chalkboard.jpg");
+	border-radius: 15px;
+	background-repeat: repeat-x;
+	background-size: cover;
+	overflow-x: auto;
+}
+
+.panel {
+	margin-top: 20px;
+	width: 100%;
+	border-radius: 5px;
+	padding: 15px;
+	background-image: url("/dist/img/chalkboard.jpg");
+	background-repeat: repeat-x;
+	background-size: cover;
+	display: flex;
+	justify-content: left;
+
+	div {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid v.$main;
+		padding: 5px 12px;
+		border-radius: 30px;
+		background-color: v.$white-color;
+		margin-right: 15px;
+		transition: ease 0.5s;
+		
+		&, > * {
+			cursor: pointer;
+		}
+
+		&:hover {
+			transform: scale(1.05);
+		}
+	}
+
+	button {
+		font-size: 20px;
+		color: v.$main;
+		background-color: inherit;
+		text-decoration: none;
+		border: none;
+	}
+
+	svg {
+		color: v.$main;
+		height: 25px;
+		// margin-right: 5px;
+	}
+}
+
 // .levels {
 // 	display: flex;
 // 	flex-direction: column;
