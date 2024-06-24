@@ -1,8 +1,9 @@
 window.onload = function () {
 	let is_flip = false;
 	let is_deck_cards_modal_open = false;
-	let set_id = "set2";
+	let set_id = "set1";
 	let set_size = 8;
+	let number_of_deck = 2;
 
 	let image_id_array = []
 
@@ -50,6 +51,7 @@ window.onload = function () {
 	}
 
 	build_new_set()
+	build_decks()
 
 	clear_desk_button.addEventListener("click", function() {
 		clear_desk()
@@ -81,6 +83,18 @@ window.onload = function () {
 		is_deck_cards_modal_open = false
 		deck_cards_modal.setAttribute("data-open", is_deck_cards_modal_open)
 	})
+
+	function build_decks() {
+		for (let index = 1; index <= number_of_deck; index++) {
+			let deck_name = "set" + index
+			
+			fetch('http://localhost:3000/assets/' + deck_name + "/description.txt")
+				.then(response => response.text())
+				.then((data) => {
+					console.log(data)
+				})
+		}
+	}
 
 	function mix_image_id_array() {
 		const createRandomNumbers = (min, max) => {
