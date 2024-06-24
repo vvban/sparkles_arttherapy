@@ -7,7 +7,7 @@
 	left: 0px;
 	width: 100%;
 	height: 100%;
-	padding: 20px;
+	padding: 15px;
 	background-color: rgba(0,0,0,0.36);
 	display: none;
 	flex-direction: column;
@@ -20,53 +20,142 @@
 	}
 	
 	&__container {
-		background-color: white;
-		width: 80%;
-		min-height: 90%;
-		border-radius: 25px;
+		background-color: #d7f6da;
+		width: 90%;
+		height: 100%;
+		border-radius: 25px 25px 25px 25px;
 		box-shadow: 0 3px 6px -4px rgba(0,0,0,.12),0 6px 16px 0 rgba(0,0,0,.08),0 9px 28px 8px rgba(0,0,0,.05);
-		padding: 25px;
+		padding: 15px 25px 15px 25px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
+		overflow-y: hidden;
+		position: relative;
 
 		@include m.respond-to("lg") {
 			width: 95%;
 		}
 	}
 
-	&__title {
-		margin-top: 20px;
-		font-size: 34px;
-		font-weight: 600;
+	&__header {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		width: 100%;
+		margin-bottom: 20px;
 	}
 
-	&__decks-list {
+	&__title {
+		font-size: 34px;
+		font-weight: 700;
 
+		@include m.respond-to("md") {
+			font-size: 24px;
+		}
+
+		@include m.respond-to("sm") {
+			font-size: 20px;
+		}
 	}
 
 	&__button_close {
-		font-size: 26px;
+		position: absolute;
+		right: 45px;
+		font-size: 20px;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		vertical-align: middle;
 		color: white;
 		background-color: black;
 		text-decoration: none;
 		border: none;
 		border: 1px solid v.$main;
-		padding: 5px 35px;
-		border-radius: 30px;
+		padding: 5px;
+		border-radius: 100%;
 		cursor: pointer;
 		transition: ease 0.6s;
 
 		&:hover {
-			transform: scale(1.05);
+			transform: scale(1.02);
+		}
+
+		@include m.respond-to("md") {
+			position: unset;
+			margin-left: 10px;
+		}
+	}
+
+	&__decks-list {
+		overflow-y: auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: flex-start;
+		flex-wrap: wrap;
+
+		div {
+			display: flex;
+			flex-direction: column;
+			justify-content: start;
+			align-items: center;
+			max-width: 400px;
+			// min-width: 300px;
+			margin: 20px 10px 0px 10px;
+			background-color: white;
+			padding: 20px;
+			border-radius: 25px;
+
+			@include m.respond-to("sm") {
+				padding: 20px 10px;
+			}
+		}
+
+		img {
+			max-width: 250px;
+			width: 100%;
+			height: auto;
+		}
+
+		p {
+			margin-top: 20px;
+			font-size: 18px;
+			text-align: left;
+			font-family: Inter-Regular, sans-serif;
+			max-width: 300px;
+
+			@include m.respond-to("sm") {
+				font-size: 16px;
+			}
+		}
+
+		button {
+			margin-top: 10px;
+			font-size: 18px;
+			color: white;
+			background-color: black;
+			text-decoration: none;
+			border: none;
+			border: 1px solid v.$main;
+			padding: 5px 35px;
+			margin-top: 25px;
+			border-radius: 30px;
+			cursor: pointer;
+			transition: ease 0.6s;
+
+			&:hover {
+				transform: scale(1.05);
+			}
 		}
 	}
 }
 
 .cards-desk {
 	width: 100%;
-	height: 300px;
+	height: 245px;
 	background-image: url("/dist/img/chalkboard.jpg");
 	border-radius: 15px;
 	background-repeat: repeat-x;
@@ -90,8 +179,9 @@
 		background-color: rgba(255,255,255,0.2);
 		padding: 25px 5px;
 		border-radius: 4px;
-	
-		@include m.respond-to("lg") {
+		text-wrap: nowrap;
+
+		@include m.respond-to("md") {
 			flex-direction: column;
 			align-items: center;
 		}
@@ -109,7 +199,7 @@
 			transition: ease 0.5s;
 			
 			@include m.respond-to("lg") {
-				margin: 10px 15px;
+				margin: 8px 5px;
 				max-width: 80%;
 				width: 100%;
 			}
@@ -161,7 +251,7 @@
 			cursor: pointer;
 			position: relative;
 			transform-style: preserve-3d;
-			transition: transform ease 1s;
+			transition: ease-out 1s;
 
 			&, &::before {
 				backface-visibility: hidden;
@@ -173,7 +263,10 @@
 				width: 100%;
 				height: 100%;
 				transform-style: preserve-3d;
-				background-color: red;
+				background-image: url("/dist/img/card-patern.png");
+				background-repeat: repeat;
+				background-position: center;
+				background-size: 200px;
 				position: absolute;
 				left: 0px;
 				top: 0px;

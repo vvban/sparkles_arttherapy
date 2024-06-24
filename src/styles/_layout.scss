@@ -19,7 +19,7 @@ body {
 	&__background {
 		background-color: v.$background-dark-color;
 		text-align: center;
-		padding: 22px;
+		padding: 8px;
 		// height: 120px;
 		display: flex;
 		
@@ -29,17 +29,19 @@ body {
 
 	&__title {
 		display: block;
-		font-size: 30px;
+		font-size: 22px;
 		color: v.$white-color;
 		padding: 0px 30px;
 		text-decoration: underline;
 
 		@include m.respond-to("md") {
-			font-size: 24px;
+			font-size: 18px;
+			padding: 0px 20px;
 		}
 	
 		@include m.respond-to("sm") {
-			font-size: 18px;
+			font-size: 16px;
+			padding: 0px 10px;
 		}
 	}
 }
