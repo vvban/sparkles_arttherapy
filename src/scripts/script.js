@@ -3,7 +3,7 @@ window.onload = function () {
 	let is_deck_cards_modal_open = false;
 	let deck_id = "set1";
 	let set_size = 8;
-	let number_of_deck = 5;
+	let number_of_deck = 2;
 	const currentUrl = "https://vvban.github.io/sparkles_arttherapy/";
 
 	let image_id_array = []
@@ -34,7 +34,7 @@ window.onload = function () {
 
 		block.setAttribute("data-card-id", card_id.toString())
 		
-		card.style.backgroundImage = "url(\"assets/" + deck_id + "/" + card_id + ".png\")";
+		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id + ".png\")";
 
 		block.appendChild(card)
 
@@ -54,7 +54,7 @@ window.onload = function () {
 		block.setAttribute("data-flip", is_flip.toString())
 		block.setAttribute("data-card-id", card_id.toString())
 		
-		card.style.backgroundImage = "url(\"assets/" + deck_id + "/" + card_id.toString() + ".png\")";
+		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id.toString() + ".png\")";
 
 		block.appendChild(card)
 
@@ -139,7 +139,7 @@ window.onload = function () {
 			let button = document.createElement("button")
 
 			block.setAttribute("data-deck-name", deck_name)
-			profile.src = "assets/" + deck_name + "/profile.jpg"
+			profile.src = currentUrl + 'assets/' + deck_name + "/profile.jpg"
 			paragraph.textContent = text
 
 			button.textContent = "Use"
