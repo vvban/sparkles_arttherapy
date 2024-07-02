@@ -4,7 +4,7 @@ window.onload = function () {
 	let deck_id = "set1";
 	let set_size = 8;
 	let number_of_deck = 2;
-	const currentUrl = "https://vvban.github.io/sparkles_arttherapy/";
+	const currentUrl = "https://arttherapyshopbydaniela.github.io/Service-MAC/";
 
 	let image_id_array = []
 
