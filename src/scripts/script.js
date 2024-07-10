@@ -2,7 +2,7 @@ window.onload = function () {
 	let is_flip = false;
 	let is_deck_cards_modal_open = false;
 	let deck_id = "set1";
-	let set_size = 8;
+	let set_size = 50;
 	let number_of_deck = 2;
 	const currentUrl = "https://arttherapyshopbydaniela.github.io/Service-MAC/";
 
@@ -34,7 +34,7 @@ window.onload = function () {
 
 		block.setAttribute("data-card-id", card_id.toString())
 		
-		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id + ".png\")";
+		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id + ".jpg\")";
 
 		block.appendChild(card)
 
@@ -54,7 +54,7 @@ window.onload = function () {
 		block.setAttribute("data-flip", is_flip.toString())
 		block.setAttribute("data-card-id", card_id.toString())
 		
-		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id.toString() + ".png\")";
+		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id.toString() + ".jpg\")";
 
 		block.appendChild(card)
 
