@@ -17,6 +17,8 @@ window.onload = function () {
 	let cards_desk = document.getElementById("cards-desk");
 	let cards_line = document.getElementById("cards-line");
 
+	let fullscreen_desk_button = document.getElementById("fullscreen-desk-button");
+	let fullscreen_toggle_button = document.getElementById("fullscreen-toggle-button");
 	let mix_cards_button = document.getElementById("mix-cards-button");
 	let flip_cards_button = document.getElementById("flip-cards-button");
 	let choose_deck_button = document.getElementById("choose-deck-button");
@@ -95,6 +97,20 @@ window.onload = function () {
 		clear_deck()
 		mix_image_id_array()
 		createSet()
+	})
+
+	fullscreen_desk_button.addEventListener("click", function() {
+		cards_desk.classList.add("fullscreen")
+		fullscreen_desk_button.classList.add("hide")
+		fullscreen_toggle_button.classList.add("show")
+		window.scrollTo(0, cards_desk.scrollIntoView);
+	})
+
+	fullscreen_toggle_button.addEventListener("click", function() {
+		cards_desk.classList.remove("fullscreen")
+		fullscreen_desk_button.classList.remove("hide")
+		fullscreen_toggle_button.classList.remove("show")
+
 	})
 
 	flip_cards_button.addEventListener("click", function() {
