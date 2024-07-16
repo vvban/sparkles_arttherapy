@@ -188,7 +188,6 @@
 
 		@include m.respond-to("sm") {
 			width: 200px;
-			bottom: 30px;
 		}
 
 		&.show {
@@ -231,11 +230,14 @@
 		padding: 20px 15px 20px 15px;
 
 		&.fullscreen {
-			min-height: 600px;
+			min-height: 800px;
 			height: calc(100vh - 50px);
-			max-height: 1000px;
-			// min-width: 600px;
-			// width: 100%;
+			
+			&::before {
+				display: block;
+				content: "";
+				margin-left: 900px;
+			}
 		}
 
 		div {
