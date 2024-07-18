@@ -1,10 +1,16 @@
 window.onload = function () {
 	let is_flip = false;
+	var is_dragging = false;
 	let is_deck_cards_modal_open = false;
 	let deck_id = "set1";
 	let set_size = 50;
 	let number_of_deck = 2;
 	const currentUrl = "https://arttherapyshopbydaniela.github.io/Service-MAC/";
+
+	const position = { 
+		x: 0, 
+		y: 0 
+	}
 
 	let image_id_array = []
 
@@ -35,18 +41,47 @@ window.onload = function () {
 		let card = document.createElement("span")
 
 		block.setAttribute("data-card-id", card_id.toString())
-		
+		block.classList.add("draggable")
+
 		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id + ".jpg\")";
 
 		block.appendChild(card)
 
-		block.addEventListener("click", function() {
+		block.addEventListener('mousedown', 
+			handleMouseDown
+		)
+
+		block.addEventListener("click", function(event) {
+			if (is_dragging) {
+				event.preventDefault()
+				event.stopImmediatePropagation();
+				return
+			}
 			block.remove() // TODO: set timer
 			moveCardToDeck(card_id)
 			image_id_array.push(card_id)
+			console.log("click");
 		})
 
 		cards_desk.appendChild(block)
+
+		function handleMouseDown(event) {
+			is_dragging = false;
+			document.addEventListener('mousemove', handleMouseMove);
+			document.addEventListener('mouseup', handleMouseUp);
+		}
+		
+		function handleMouseMove(event) {
+			is_dragging = true;
+		}  
+		
+		function handleMouseUp(event) {
+			document.removeEventListener('mousemove', handleMouseMove);
+			document.removeEventListener('mouseup', handleMouseUp);
+		}
+
+		updateDragable("#cards-desk div[data-card-id=\"" + card_id.toString() + "\"]")
+		// updateDragable(block)
 	}
 
 	function moveCardToDeck(card_id) {
@@ -189,5 +224,39 @@ window.onload = function () {
 
 		let temp = suffle(image_id_array); // Adjust min and max as needed
 		image_id_array = temp
+	}
+	
+	const restrictToParent = interact.modifiers.restrict({
+		restriction: 'parent',
+        endOnly: true,
+		elementRect: { left: 0, right: 0, top: 0, bottom: 0 },
+	  })
+	  
+	  // create a snap modifier which changes the event coordinates to the closest
+	  // corner of a grid
+	  const snap100x100 = interact.modifiers.snap({
+		targets: [interact.snappers.grid({ x: 20, y: 20 })],
+		relativePoints: [{ x: 0.5, y: 0.5 }],
+	  })
+
+	function updateDragable() {
+		interact('.draggable').draggable({
+			listeners: {
+				start (event) {
+					const style = window.getComputedStyle(event.target);
+					const matrix = new DOMMatrix(style.transform);
+					position.x = matrix.m41
+					position.y = matrix.m42
+				},	
+				move (event) { 
+					position.x += event.dx
+					position.y += event.dy
+			
+					event.target.style.transform = 
+						`translate(${position.x}px, ${position.y}px)`
+				}
+			},
+			modifiers: [restrictToParent, snap100x100]
+		})
 	}
 };

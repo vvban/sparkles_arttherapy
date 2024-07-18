@@ -185,6 +185,7 @@
 		opacity: 0.45;
 		left: 50%;
 		transform: translateX(-50%);
+		z-index: 2;
 
 		@include m.respond-to("sm") {
 			width: 200px;
@@ -222,6 +223,7 @@
 		display: flex;
 		justify-content: left;
 		flex-direction: row;
+		position: relative;
 		overflow-y: hidden;
 		overflow-x: scroll;
 		flex-wrap: nowrap;
@@ -248,8 +250,8 @@
 			border-radius: 10px;
 			margin: 0px 5px;
 			background-color: white;
-			position: relative;
-			transition: ease-out 1s;
+			position: absolute;
+			// transition: ease-out 1s;
 			cursor: pointer;
 			display: flex;
 			justify-content: center;
