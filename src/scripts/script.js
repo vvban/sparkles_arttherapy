@@ -267,4 +267,10 @@ window.onload = function () {
 			modifiers: [snap100x100, restriction]
 		})
 	}
+
+	window.addEventListener('resize', (event) => {
+		// Adjust cards position
+			draggable.reflow({ name: 'drag', axis: 'xy' })
+	});
 };
+
