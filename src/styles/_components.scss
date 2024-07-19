@@ -218,29 +218,28 @@
 			transform: rotateX(180deg) translateY(2px);
 		}
 	}
-	
-	&__container {
-		display: flex;
-		justify-content: left;
-		flex-direction: row;
+
+	&__scroll-view {
+		overflow-y: auto;
+		overflow-x: auto;
+		padding-bottom: 20px;
 		position: relative;
-		overflow-y: hidden;
-		overflow-x: scroll;
-		flex-wrap: nowrap;
-		box-sizing: content-box;
-		min-height: 225px;
-		padding: 20px 15px 20px 15px;
 
 		&.fullscreen {
-			min-height: 800px;
-			height: calc(100vh - 50px);
-			
-			&::before {
-				display: block;
-				content: "";
-				margin-left: 900px;
+			.cards-desk__container {
+				min-height: 1000px;
+				min-width: 1200px;
 			}
 		}
+	}
+	
+	&__container {
+		min-width: 600px;
+		width: 100%;
+		height: 100%;	
+		position: relative;
+		min-height: 225px;
+		box-sizing: content-box;
 
 		div {
 			box-sizing: border-box;

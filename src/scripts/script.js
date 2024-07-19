@@ -7,6 +7,7 @@ window.onload = function () {
 	let number_of_deck = 2;
 	const currentUrl = "https://arttherapyshopbydaniela.github.io/Service-MAC/";
 
+	const draggable = interact('.draggable')
 	const position = { 
 		x: 0, 
 		y: 0 
@@ -20,6 +21,7 @@ window.onload = function () {
 	let deck_cards_modal_close_button = document.getElementById("deck-of-cards-modal-button-close");
 	
 
+	let cards_desk_scroll_view = document.getElementById("cards-desk__scroll-view");
 	let cards_desk = document.getElementById("cards-desk");
 	let cards_line = document.getElementById("cards-line");
 
@@ -135,17 +137,19 @@ window.onload = function () {
 	})
 
 	fullscreen_desk_button.addEventListener("click", function() {
-		cards_desk.classList.add("fullscreen")
+		cards_desk_scroll_view.classList.add("fullscreen")
 		fullscreen_desk_button.classList.add("hide")
 		fullscreen_toggle_button.classList.add("show")
 		window.scrollTo(0, cards_desk.scrollIntoView);
 	})
 
 	fullscreen_toggle_button.addEventListener("click", function() {
-		cards_desk.classList.remove("fullscreen")
+		cards_desk_scroll_view.classList.remove("fullscreen")
 		fullscreen_desk_button.classList.remove("hide")
 		fullscreen_toggle_button.classList.remove("show")
 
+		// FIX: adjust cards position
+		draggable.reflow({ name: 'drag', axis: 'xy' })
 	})
 
 	flip_cards_button.addEventListener("click", function() {
@@ -238,7 +242,7 @@ window.onload = function () {
 	})
 
 	function updateDragable() {
-		interact('.draggable').draggable({
+		draggable.draggable({
 			listeners: {
 				start (event) {
 					const style = window.getComputedStyle(event.target);
