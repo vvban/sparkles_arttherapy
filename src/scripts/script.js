@@ -38,7 +38,7 @@ window.onload = function () {
 		}
 	}
 
-	function moveCardToDesk(card_id) {
+	function moveCardToDesk(card_id, new_position = 0) {
 		let block = document.createElement("div")
 		let card = document.createElement("span")
 
@@ -65,7 +65,12 @@ window.onload = function () {
 			console.log("click");
 		})
 
+		
+		block.style.transform = `translate(${new_position}px, 0px)`
 		cards_desk.appendChild(block)
+		// Adjust cards position
+		draggable.reflow({ name: 'drag', axis: 'xy' })
+	
 
 		function handleMouseDown(event) {
 			is_dragging = false;
@@ -82,8 +87,7 @@ window.onload = function () {
 			document.removeEventListener('mouseup', handleMouseUp);
 		}
 
-		updateDragable("#cards-desk div[data-card-id=\"" + card_id.toString() + "\"]")
-		// updateDragable(block)
+		updateDragable() // TODO: optimize fix -> refer to one specific element
 	}
 
 	function moveCardToDeck(card_id) {
@@ -102,7 +106,9 @@ window.onload = function () {
 			let temp = image_id_array.slice(0,index).concat(image_id_array.slice(index+1,image_id_array.length))
 			image_id_array = temp
 			block.remove() // TODO: set timer
-			moveCardToDesk(card_id)
+
+			let new_position = -5 + 40 * cards_desk.childElementCount
+			moveCardToDesk(card_id, new_position)
 		})
 		
 		cards_line.appendChild(block)
@@ -148,7 +154,7 @@ window.onload = function () {
 		fullscreen_desk_button.classList.remove("hide")
 		fullscreen_toggle_button.classList.remove("show")
 
-		// FIX: adjust cards position
+		// Adjust cards position
 		draggable.reflow({ name: 'drag', axis: 'xy' })
 	})
 
