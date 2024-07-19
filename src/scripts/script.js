@@ -12,6 +12,7 @@ window.onload = function () {
 		x: 0, 
 		y: 0 
 	}
+	const offset = { x: 0, y: 0 }
 
 	let image_id_array = []
 
@@ -248,24 +249,54 @@ window.onload = function () {
 	})
 
 	function updateDragable() {
-		draggable.draggable({
-			listeners: {
-				start (event) {
-					const style = window.getComputedStyle(event.target);
-					const matrix = new DOMMatrix(style.transform);
-					position.x = matrix.m41
-					position.y = matrix.m42
-				},	
-				move (event) { 
-					position.x += event.dx
-					position.y += event.dy
-			
-					event.target.style.transform = 
-						`translate(${position.x}px, ${position.y}px)`
-				}
-			},
-			modifiers: [snap100x100, restriction]
-		})
+		draggable
+			.draggable({
+				listeners: {
+					start (event) {
+						const style = window.getComputedStyle(event.target);
+						const matrix = new DOMMatrix(style.transform);
+						position.x = matrix.m41
+						position.y = matrix.m42
+					},	
+					move (event) { 
+						position.x += event.dx
+						position.y += event.dy
+				
+						event.target.style.transform = 
+							`translate(${position.x}px, ${position.y}px)`
+					}
+				},
+				modifiers: [snap100x100, restriction]
+			})
+			.resizable({
+				edges: { top: false, left: false, bottom: true, right: true },
+				listeners: {
+					mmove: function (event) {
+						let { x, y } = event.target.dataset
+				
+						x = (parseFloat(x) || 0) + event.deltaRect.left
+						y = (parseFloat(y) || 0) + event.deltaRect.top
+				
+						Object.assign(event.target.style, {
+						  width: `${event.rect.width}px`,
+						  height: `${event.rect.height}px`,
+						//   transform: `translate(${x}px, ${y}px)`
+						})
+				
+						Object.assign(event.target.dataset, { x, y })
+					}
+				},
+				modifiers: [
+				  interact.modifiers.aspectRatio({
+					// make sure the width is always double the height
+					ratio: 1.4,
+					// also restrict the size by nesting another modifier
+					modifiers: [
+					  interact.modifiers.restrictSize({ max: 'parent' }),
+					],
+				  }),
+				],
+			})
 	}
 
 	window.addEventListener('resize', (event) => {
