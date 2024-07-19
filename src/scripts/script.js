@@ -225,12 +225,6 @@ window.onload = function () {
 		let temp = suffle(image_id_array); // Adjust min and max as needed
 		image_id_array = temp
 	}
-	
-	const restrictToParent = interact.modifiers.restrict({
-		restriction: 'parent',
-        endOnly: true,
-		elementRect: { left: 0, right: 0, top: 0, bottom: 0 },
-	  })
 	  
 	  // create a snap modifier which changes the event coordinates to the closest
 	  // corner of a grid
@@ -238,6 +232,10 @@ window.onload = function () {
 		targets: [interact.snappers.grid({ x: 20, y: 20 })],
 		relativePoints: [{ x: 0.5, y: 0.5 }],
 	  })
+
+	  const restriction = interact.modifiers.restrictRect({
+		  restriction: 'parent'
+	})
 
 	function updateDragable() {
 		interact('.draggable').draggable({
@@ -256,7 +254,7 @@ window.onload = function () {
 						`translate(${position.x}px, ${position.y}px)`
 				}
 			},
-			modifiers: [restrictToParent, snap100x100]
+			modifiers: [snap100x100, restriction]
 		})
 	}
 };

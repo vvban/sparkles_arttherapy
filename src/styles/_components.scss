@@ -227,8 +227,8 @@
 		overflow-y: hidden;
 		overflow-x: scroll;
 		flex-wrap: nowrap;
-		box-sizing: border-box;
-		min-height: 245px;
+		box-sizing: content-box;
+		min-height: 225px;
 		padding: 20px 15px 20px 15px;
 
 		&.fullscreen {
@@ -251,7 +251,6 @@
 			margin: 0px 5px;
 			background-color: white;
 			position: absolute;
-			// transition: ease-out 1s;
 			cursor: pointer;
 			display: flex;
 			justify-content: center;
