@@ -237,15 +237,13 @@ window.onload = function () {
 		image_id_array = temp
 	}
 	  
-	  // create a snap modifier which changes the event coordinates to the closest
-	  // corner of a grid
-	  const snap100x100 = interact.modifiers.snap({
+	const snap100x100 = interact.modifiers.snap({
 		targets: [interact.snappers.grid({ x: 20, y: 20 })],
 		relativePoints: [{ x: 0.5, y: 0.5 }],
-	  })
+	})
 
-	  const restriction = interact.modifiers.restrictRect({
-		  restriction: 'parent'
+	const restriction = interact.modifiers.restrictRect({
+		restriction: 'parent'
 	})
 
 	function updateDragable() {
@@ -267,41 +265,44 @@ window.onload = function () {
 					}
 				},
 				modifiers: [snap100x100, restriction]
+
 			})
 			.resizable({
 				edges: { top: false, left: false, bottom: true, right: true },
 				listeners: {
-					mmove: function (event) {
-						let { x, y } = event.target.dataset
-				
-						x = (parseFloat(x) || 0) + event.deltaRect.left
-						y = (parseFloat(y) || 0) + event.deltaRect.top
-				
-						Object.assign(event.target.style, {
+				  move: function (event) {
+
+					let targets = document.querySelectorAll(".draggable").forEach((target) => {
+						Object.assign(target.style, {
 						  width: `${event.rect.width}px`,
 						  height: `${event.rect.height}px`,
-						//   transform: `translate(${x}px, ${y}px)`
 						})
-				
-						Object.assign(event.target.dataset, { x, y })
-					}
+					});
+
+
+				  }
 				},
 				modifiers: [
-				  interact.modifiers.aspectRatio({
-					// make sure the width is always double the height
-					ratio: 1.4,
-					// also restrict the size by nesting another modifier
-					modifiers: [
-					  interact.modifiers.restrictSize({ max: 'parent' }),
-					],
-				  }),
-				],
-			})
+					interact.modifiers.aspectRatio({
+					  // make sure the width is always double the height
+					  ratio: 0.714,
+					  // also restrict the size by nesting another modifier
+					  modifiers: [
+						interact.modifiers.restrictSize({ 
+							min: { width: 75, height: 105 },
+     						max: { width: 600, height: 840 }
+						 }),
+					  ],
+					}),
+				  ],
+
+			  })
 	}
 
-	window.addEventListener('resize', (event) => {
+	window.addEventListener('resize', () => {
 		// Adjust cards position
-			draggable.reflow({ name: 'drag', axis: 'xy' })
+		draggable.reflow({ name: 'drag', axis: 'xy' })
+
 	});
 };
 

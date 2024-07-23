@@ -1,11 +1,11 @@
 // Packages import
 const gulp = require('gulp')
-const less = require('gulp-less')
-const stylus = require('gulp-stylus')
+// const less = require('gulp-less')
+// const stylus = require('gulp-stylus')
 const sass = require('gulp-sass')(require('sass'))
 const rename = require('gulp-rename')
 const cleanCSS = require('gulp-clean-css')
-const ts = require('gulp-typescript')
+// const ts = require('gulp-typescript')
 //const coffee = require('gulp-coffee')
 const babel = require('gulp-babel')
 const uglify = require('gulp-uglify')
@@ -61,6 +61,12 @@ function html() {
   .pipe(browsersync.stream())
 }
 
+const autoprefixerOptions = {
+	Browserslist: ['last 20 versions', '> 0.5%'],
+  cascade: true
+};
+
+
 // Handling Style Preprocessors
 function styles() {
   return gulp.src(paths.styles.src)
@@ -69,7 +75,7 @@ function styles() {
   //.pipe(stylus())
   .pipe(sass().on('error', sass.logError))
   .pipe(autoprefixer({
-    cascade: true
+    autoprefixerOptions
   }))
   .pipe(cleanCSS({
     level: 2
