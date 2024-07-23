@@ -272,7 +272,7 @@ window.onload = function () {
 				listeners: {
 				  move: function (event) {
 
-					let targets = document.querySelectorAll(".draggable").forEach((target) => {
+					document.querySelectorAll(".draggable").forEach((target) => {
 						Object.assign(target.style, {
 						  width: `${event.rect.width}px`,
 						  height: `${event.rect.height}px`,
@@ -304,5 +304,14 @@ window.onload = function () {
 		draggable.reflow({ name: 'drag', axis: 'xy' })
 
 	});
+
+	// let scroll_shift = 2;
+	// setInterval(() => {
+
+    // 	cards_desk_scroll_view.scrollLeft = cards_desk_scroll_view.scrollLeft + scroll_shift;
+	// 	sleep(1);
+    // 	cards_desk_scroll_view.scrollLeft = cards_desk_scroll_view.scrollLeft - scroll_shift;
+	// 	// scroll_shift = scroll_shift * -1;
+	// }, 400);
 };
 
