@@ -78,6 +78,21 @@ main {
 	}
 }
 
+/* Customize the scrollbar appearance */
+::-webkit-scrollbar {
+	-webkit-appearance: none;
+}
+
+/* Vertical scrollbar style */
+::-webkit-scrollbar:vertical {
+	width: 12px; /* Adjust the width as needed */
+}
+
+/* Horizontal scrollbar style (optional) */
+::-webkit-scrollbar:horizontal {
+	height: 12px; /* Adjust the height as needed */
+}
+
 /* For Firefox */
 html {
 	scrollbar-color: v.$scroll-thumb-color v.$scroll-bar-color;

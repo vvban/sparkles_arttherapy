@@ -309,7 +309,7 @@ window.onload = function () {
 	// setInterval(() => {
 
     // 	cards_desk_scroll_view.scrollLeft = cards_desk_scroll_view.scrollLeft + scroll_shift;
-	// 	sleep(1);
+	// 	sleep(0);
     // 	cards_desk_scroll_view.scrollLeft = cards_desk_scroll_view.scrollLeft - scroll_shift;
 	// 	// scroll_shift = scroll_shift * -1;
 	// }, 400);
