@@ -221,9 +221,10 @@
 
 	&__scroll-view {
 		overflow-y: auto;
-		overflow-x: scroll;
+		overflow-x: auto;
 		padding-bottom: 20px;
 		position: relative;
+		// scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
 
 		&.fullscreen {
 			.cards-desk__container {
@@ -231,6 +232,24 @@
 				min-width: 1200px;
 			}
 		}
+
+		// &::-webkit-scrollbar {
+		// 	-webkit-appearance: none !important;
+		// }
+	}
+
+	&__scroll-status {
+		display: block;
+		position: absolute;
+		// height: 12px;
+		// width: 100px;
+		border-radius: 15px;
+		// background-color: v.$scroll-thumb-color;
+		bottom: 15px;
+		left: 15px;
+		color: v.$scroll-thumb-color;
+		// cursor: pointer;
+		// z-index: 1;
 	}
 	
 	&__container {

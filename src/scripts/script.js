@@ -23,6 +23,7 @@ window.onload = function () {
 	
 
 	let cards_desk_scroll_view = document.getElementById("cards-desk__scroll-view");
+	let cards_desk_scroll_status = document.getElementById("cards-desk__scroll-status");
 	let cards_desk = document.getElementById("cards-desk");
 	let cards_line = document.getElementById("cards-line");
 
@@ -305,13 +306,31 @@ window.onload = function () {
 
 	});
 
-	// let scroll_shift = 2;
-	// setInterval(() => {
+	setInterval(() => {
+		let el = cards_desk_scroll_view;
 
-    // 	cards_desk_scroll_view.scrollLeft = cards_desk_scroll_view.scrollLeft + scroll_shift;
-	// 	sleep(0);
-    // 	cards_desk_scroll_view.scrollLeft = cards_desk_scroll_view.scrollLeft - scroll_shift;
-	// 	// scroll_shift = scroll_shift * -1;
-	// }, 400);
+		let x = false;
+		let y = false;
+		let text = "";
+
+		if (el.scrollWidth > el.clientWidth) {
+			x = true;
+		}
+		if (el.scrollHeight > el.clientHeight){
+			y = true;
+		}
+
+		if (y && x) {
+			text = "scroll x and y";
+		} else if (x) {
+			text = "scroll x";
+		} else if (y) {
+			text = "scroll y";
+		}
+		
+		cards_desk_scroll_status.innerText = text;
+		
+	}, 1000);
+
 };
 
