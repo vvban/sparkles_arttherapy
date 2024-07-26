@@ -308,27 +308,11 @@ window.onload = function () {
 
 	setInterval(() => {
 		let el = cards_desk_scroll_view;
-
-		let x = false;
-		let y = false;
-		let text = "";
-
-		if (el.scrollWidth > el.clientWidth) {
-			x = true;
+		if (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight) {
+			cards_desk_scroll_status.innerText = "Scrollable";
+		} else {
+			cards_desk_scroll_status.innerText = "";
 		}
-		if (el.scrollHeight > el.clientHeight){
-			y = true;
-		}
-
-		if (y && x) {
-			text = "scroll x and y";
-		} else if (x) {
-			text = "scroll x";
-		} else if (y) {
-			text = "scroll y";
-		}
-		
-		cards_desk_scroll_status.innerText = text;
 		
 	}, 1000);
 
