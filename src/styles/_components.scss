@@ -236,7 +236,7 @@
 		svg {
 			color: v.$main;
 			height: 25px;
-			transform: rotateX(180deg) translateY(2px);
+			transform: translateY(2px);
 		}
 	}
 
@@ -363,7 +363,7 @@
 			border-radius: 11px;
 			background-color: v.$white-color;
 			margin-right: 15px;
-			transition: ease 0.5s;
+			transition: ease-in-out 0.5s;
 
 			&.hide {
 				display: none;
@@ -382,6 +382,10 @@
 			&:hover {
 				transform: scale(1.05);
 			}
+
+			&:hover, &:hover > svg {
+				transform: translateY(0.5px) scale(1.05);
+			}
 		}
 	
 		button {
@@ -396,6 +400,7 @@
 		svg {
 			color: v.$main;
 			height: 25px;
+			transition: ease-in-out 0.5s;
 		}
 
 		.change-cards-size-button {
