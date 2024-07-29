@@ -236,10 +236,10 @@ window.onload = function () {
 		for (let index = 1; index <= number_of_deck; index++) {
 			let deck_name = "set" + index
 			
-			fetch(currentUrl + 'assets/' + deck_name + "/description.txt")
+			fetch(currentUrl + 'assets/' + deck_name + "/text.txt")
 				.then(response => response.text())
 				.then((data) => {
-					build_deck_profile(deck_name, data)
+					build_deck_profile(deck_name, data.split("\/\&\/"))
 				})
 		}
 
@@ -247,12 +247,18 @@ window.onload = function () {
 
 			let block = document.createElement("div")
 			let profile = document.createElement("img")
+			let header = document.createElement("p")
 			let paragraph = document.createElement("p")
 			let button = document.createElement("button")
 
 			block.setAttribute("data-deck-name", deck_name)
 			profile.src = currentUrl + 'assets/' + deck_name + "/profile.jpg"
-			paragraph.textContent = text
+			
+			header.classList.add("header")
+			header.textContent = text[0]
+
+			paragraph.classList.add("paragraph")
+			paragraph.textContent = text[1]
 
 			button.textContent = "Use"
 			button.addEventListener("click", function() {
@@ -264,6 +270,7 @@ window.onload = function () {
 			})
 
 			block.appendChild(profile)
+			block.appendChild(header)
 			block.appendChild(paragraph)
 			block.appendChild(button)
 			

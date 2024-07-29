@@ -105,6 +105,7 @@
 		justify-content: center;
 		align-items: stretch;
 		flex-wrap: wrap;
+		padding: 35px 0px 45px 0px;
 		
 		div {
 			display: flex;
@@ -124,18 +125,35 @@
 		}
 		
 		img {
-			max-width: 250px;
+			max-width: 225px;
 			width: 100%;
 			height: auto;
 		}
-		
-		p {
+
+		.header {
 			margin-top: 20px;
+			font-size: 20px;
+			text-align: left;
+			font-family: Inter-Regular, sans-serif;
+			font-weight: bold;
+			max-width: 300px;
+			text-align: center;
+			width: 100%;
+			
+			@include m.respond-to("sm") {
+				font-size: 18px;
+			}
+		}
+		
+		.paragraph {
+			margin-top: 15px;
 			font-size: 18px;
 			text-align: left;
 			font-family: Inter-Regular, sans-serif;
 			max-width: 300px;
 			margin-bottom: 25px;
+			text-align: center;
+			width: 100%;
 			
 			@include m.respond-to("sm") {
 				font-size: 16px;
