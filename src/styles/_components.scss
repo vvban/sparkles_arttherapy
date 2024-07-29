@@ -13,7 +13,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	z-index: 1;
+	z-index: 100;
 
 	&[data-open="true"] {
 		display: flex;
@@ -268,11 +268,11 @@
 		bottom: 20px;
 		right: 40px;
 		color: v.$scroll-thumb-color;
-		z-index: 100;
+		z-index: 10;
 		user-select: none;
 		animation-name: cssAnimation;
 		animation-duration: 5s;
-		animation-timing-function: ease-in-out;
+		animation-timing-function: ease-in;
 		animation-direction: normal;
 		animation-iteration-count: infinite;
 		animation-fill-mode: reverse;
@@ -282,7 +282,7 @@
 		0% {
 			opacity: 1;
 		}
-		50% {
+		75% {
 			opacity: 0;
 		}
 		100% {
@@ -366,6 +366,10 @@
 			background-color: transparent;
 			border: none;
 			user-select: none;
+			
+			& > * {
+				cursor: pointer;
+			}
 
 			@include m.respond-to("md") {
 				width: 100%;
@@ -400,10 +404,6 @@
 					max-width: 100%;
 					width: 100%;
 				}
-				
-				& > * {
-					cursor: pointer;
-				}
 		
 				&:hover {
 					transform: scale(1.05);
@@ -422,6 +422,7 @@
 				border: none;
 				user-select: none;
 				white-space: nowrap;
+				cursor: pointer;
 			}
 		
 			svg {
