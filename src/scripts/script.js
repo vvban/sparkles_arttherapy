@@ -12,7 +12,10 @@ window.onload = function () {
 		x: 0, 
 		y: 0 
 	}
-	const offset = { x: 0, y: 0 }
+	const min_width = 75;
+	const max_width = 600;
+	const card_ration = 0.714;
+	const size_modifier = 0.075;
 
 	let image_id_array = []
 
@@ -27,6 +30,8 @@ window.onload = function () {
 	let cards_desk = document.getElementById("cards-desk");
 	let cards_line = document.getElementById("cards-line");
 
+	let increase_cards_size_button = document.getElementById("increase-cards-size-button");
+	let decrease_cards_size_button = document.getElementById("decrease-cards-size-button");
 	let fullscreen_desk_button = document.getElementById("fullscreen-desk-button");
 	let fullscreen_toggle_button = document.getElementById("fullscreen-toggle-button");
 	let mix_cards_button = document.getElementById("mix-cards-button");
@@ -132,6 +137,50 @@ window.onload = function () {
 	}
 
 	build_new_deck()
+
+	increase_cards_size_button.addEventListener("click", function() {
+		let card = document.querySelector(".draggable")
+		if (card == null) return;
+
+		let old_width = card.getBoundingClientRect().width;
+
+		let new_width = old_width * (1 + size_modifier);
+		if (new_width > max_width) new_width = max_width;
+			else if (new_width < min_width) new_width = min_width;
+		console.log(new_width);
+
+		document.querySelectorAll(".draggable").forEach((target) => {
+
+			Object.assign(target.style, {
+			  width: `${new_width}px`,
+			  height: `${new_width / card_ration}px`,
+			})
+
+		});
+
+	});
+
+	decrease_cards_size_button.addEventListener("click", function() {
+		let card = document.querySelector(".draggable")
+		if (card == null) return;
+		
+		let old_width = card.getBoundingClientRect().width;
+		
+		let new_width = old_width * (1 - size_modifier);
+		if (new_width > max_width) new_width = max_width;
+			else if (new_width < min_width) new_width = min_width;
+		console.log(new_width);
+
+		document.querySelectorAll(".draggable").forEach((target) => {
+
+			Object.assign(target.style, {
+			  width: `${new_width}px`,
+			  height: `${new_width / card_ration}px`,
+			})
+
+		});
+
+	});
 
 	clear_desk_button.addEventListener("click", function() {
 		clear_desk()
@@ -286,12 +335,12 @@ window.onload = function () {
 				modifiers: [
 					interact.modifiers.aspectRatio({
 					  // make sure the width is always double the height
-					  ratio: 0.714,
+					  ratio: card_ration,
 					  // also restrict the size by nesting another modifier
 					  modifiers: [
 						interact.modifiers.restrictSize({ 
-							min: { width: 75, height: 105 },
-     						max: { width: 600, height: 840 }
+							min: { width: min_width, height: min_width / card_ration },
+     						max: { width: max_width, height: max_width / card_ration }
 						 }),
 					  ],
 					}),

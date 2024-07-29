@@ -379,6 +379,17 @@
 			color: v.$main;
 			height: 25px;
 		}
+
+		.change-cards-size-button {
+			background-color: transparent;
+			border: none;
+			padding: 0;
+			margin: 0;
+
+			&:hover {
+				transform: none;
+			}
+		}
 	}
 
 	&__cards-line {
