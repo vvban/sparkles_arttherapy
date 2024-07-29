@@ -209,7 +209,7 @@
 		user-select: none;
 
 		@include m.respond-to("sm") {
-			width: 200px;
+			max-width: 300px;
 		}
 
 		&.show {
@@ -231,6 +231,7 @@
 			background-color: inherit;
 			text-decoration: none;
 			border: none;
+			white-space: nowrap;
 		}
 	
 		svg {
@@ -343,76 +344,94 @@
 	&__action {
 		display: flex;
 		justify-content: center;
+		flex-direction: row;
 		background-color: rgba(255,255,255,0.2);
-		padding: 25px 15px;
+		padding: 25px 15px 10px 15px;
 		border-radius: 4px;
-		flex-wrap: nowrap;
+		flex-wrap: wrap;
 
 		@include m.respond-to("lg") {
+			padding: 25px 10px 5px 10px;
+		}
+
+		@include m.respond-to("md") {
 			flex-direction: column;
 			align-items: center;
+			padding: 25px 15px 5px 15px;
 		}
 
-		div {
+		.couple-button {
 			display: flex;
 			flex-direction: row;
-			justify-content: center;
-			align-items: center;
-			border: 1px solid v.$main;
-			padding: 5px 12px;
-			border-radius: 11px;
-			background-color: v.$white-color;
-			margin-right: 15px;
-			transition: ease-in-out 0.5s;
-
-			&.hide {
-				display: none;
-			}
-			
-			@include m.respond-to("lg") {
-				margin: 6px 5px;
-				max-width: 600px;
-				width: 100%;
-			}
-			
-			&, > * {
-				cursor: pointer;
-			}
-	
-			&:hover {
-				transform: scale(1.05);
-			}
-
-			&:hover, &:hover > svg {
-				transform: translateY(0.5px) scale(1.05);
-			}
-		}
-	
-		button {
-			font-size: 20px;
-			color: v.$main;
-			background-color: inherit;
-			text-decoration: none;
-			border: none;
-			user-select: none;
-		}
-	
-		svg {
-			color: v.$main;
-			height: 25px;
-			transition: ease-in-out 0.5s;
-		}
-
-		.change-cards-size-button {
 			background-color: transparent;
 			border: none;
-			padding: 0;
-			margin: 0;
+			user-select: none;
 
-			&:hover {
-				transform: none;
+			@include m.respond-to("md") {
+				width: 100%;
 			}
+
+			@include m.respond-to("sm") {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			div {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				border: 1px solid v.$main;
+				padding: 5px 12px;
+				margin: 0px 15px 15px 0px;
+				border-radius: 11px;
+				background-color: v.$white-color;
+				transition: ease-in-out 0.5s;
+
+				&.hide {
+					display: none;
+				}
+				
+				@include m.respond-to("lg") {
+					margin: 0px 10px 10px 0px;
+				}
+
+				@include m.respond-to("md") {
+					max-width: 100%;
+					width: 100%;
+				}
+				
+				& > * {
+					cursor: pointer;
+				}
+		
+				&:hover {
+					transform: scale(1.05);
+				}
+	
+				&:hover, &:hover > svg {
+					transform: translateY(0.5px) scale(1.05);
+				}
+			}
+
+			button {
+				font-size: 20px;
+				color: v.$main;
+				background-color: inherit;
+				text-decoration: none;
+				border: none;
+				user-select: none;
+				white-space: nowrap;
+			}
+		
+			svg {
+				color: v.$main;
+				height: 25px;
+				transition: ease-in-out 0.5s;
+			}
+
 		}
+
 	}
 
 	&__cards-line {
