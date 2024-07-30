@@ -85,8 +85,9 @@
 		user-select: none;
 
 		&:hover {
-			width: 42px;
-			height: 42px;
+			// width: 42px;
+			// height: 42px;
+			transform: scale(1.05);
 		}
 
 		@include m.respond-to("md") {
