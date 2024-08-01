@@ -251,8 +251,18 @@ window.onload = function () {
 			let paragraph = document.createElement("p")
 			let button = document.createElement("button")
 
+			const click_fun = () => {
+				deck_id = button.parentElement.getAttribute("data-deck-name")
+				clear_desk()
+				build_new_deck()
+				close_deck_cards_modal()
+				window.scrollTo(0, document.body.scrollHeight);
+			}
+
 			block.setAttribute("data-deck-name", deck_name)
+
 			profile.src = currentUrl + 'assets/' + deck_name + "/profile.jpg"
+			profile.addEventListener("click", () => { click_fun(); })
 			
 			header.classList.add("header")
 			header.textContent = text[0]
@@ -261,13 +271,8 @@ window.onload = function () {
 			paragraph.textContent = text[1]
 
 			button.textContent = "Use"
-			button.addEventListener("click", function() {
-				deck_id = button.parentElement.getAttribute("data-deck-name")
-				clear_desk()
-				build_new_deck()
-				close_deck_cards_modal()
-				window.scrollTo(0, document.body.scrollHeight);
-			})
+			button.addEventListener("click", () => { click_fun(); })
+
 
 			block.appendChild(profile)
 			block.appendChild(header)
