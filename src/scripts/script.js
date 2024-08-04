@@ -40,6 +40,9 @@ window.onload = function () {
 	let clear_desk_button = document.getElementById("clear-desk-button");
 
 	function createSet() {
+		let style = document.getElementById("inner-style-from-script").sheet.cssRules[0];
+		style.style.backgroundImage = "url(\"" + currentUrl + 'assets/' + deck_id + "/profile.jpg\")";
+
 		for (let i = 0; i < image_id_array.length; i++) {
 			moveCardToDeck(image_id_array[i])
 		}
