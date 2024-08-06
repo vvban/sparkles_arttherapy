@@ -491,15 +491,26 @@
 			transform: rotateY(180deg);
 		}
 
-		span {
+		img {
 			display: block;
 			background-size: cover;
 			background-repeat: no-repeat;
 			background-position: center;
-			width: 130px;
-			height: 190px;
 			border-radius: 3px;
 			overflow: hidden;
+
+			&:not([src]) {
+				visibility: hidden;
+			}
 		}
+
+		/* Fixes Firefox anomaly during image load */
+		@-moz-document url-prefix() {
+			img:-moz-loading {
+			  visibility: hidden;
+			}
+		}
+
+
 	}
 }

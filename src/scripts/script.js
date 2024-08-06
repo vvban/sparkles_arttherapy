@@ -1,3 +1,7 @@
+/**
+ * TODO: We can optimize = merge all scripts to one file.
+ */
+
 window.onload = function () {
 	let is_flip = false;
 	var is_dragging = false;
@@ -5,6 +9,7 @@ window.onload = function () {
 	let deck_id = "set1";
 	let set_size = 50;
 	let number_of_deck = 2;
+	let decks_is_built = false;
 	const currentUrl = "https://arttherapyshopbydaniela.github.io/Service-MAC/";
 
 	const draggable = interact('.draggable')
@@ -46,6 +51,8 @@ window.onload = function () {
 		for (let i = 0; i < image_id_array.length; i++) {
 			moveCardToDeck(image_id_array[i])
 		}
+
+		lazyLoadInstance.update();
 	}
 
 	function moveCardToDesk(card_id, new_position = 0) {
@@ -71,8 +78,8 @@ window.onload = function () {
 			}
 			block.remove() // TODO: set timer
 			moveCardToDeck(card_id)
+			lazyLoadInstance.update();
 			image_id_array.push(card_id)
-			console.log("click");
 		})
 
 		
@@ -102,12 +109,23 @@ window.onload = function () {
 
 	function moveCardToDeck(card_id) {
 		let block = document.createElement("div")
-		let card = document.createElement("span")
+		let card = document.createElement("img")
 
 		block.setAttribute("data-flip", is_flip.toString())
 		block.setAttribute("data-card-id", card_id.toString())
-		
-		card.style.backgroundImage = "url(\"" + currentUrl + "assets/" + deck_id + "/" + card_id.toString() + ".jpg\")";
+
+		card.alt = "Image of the metaphorical card";
+		card.width = 130;
+		card.height = 190;
+		if (card_id > 5) {
+			card.classList.add("lazy");
+			card.setAttribute(
+				"data-src",
+				currentUrl + "assets/" + deck_id + "/" + card_id.toString() + ".jpg"
+			);
+		} else {
+			card.src = currentUrl + "assets/" + deck_id + "/" + card_id.toString() + ".jpg";
+		}
 
 		block.appendChild(card)
 
@@ -221,6 +239,10 @@ window.onload = function () {
 	})
 
 	choose_deck_button.addEventListener("click", function() {
+		if (!decks_is_built) {
+			build_decks();
+			decks_is_built = true;
+		}
 		is_deck_cards_modal_open = true
 
 		deck_cards_modal.setAttribute("data-open", is_deck_cards_modal_open)
@@ -248,6 +270,11 @@ window.onload = function () {
 
 		const build_deck_profile = (deck_name, text) => {
 
+			// FIXME: We can OPTIMIZE loading time!!!
+			/**
+			 * 1 Join text files to one (1 requrest)
+			 */
+
 			let block = document.createElement("div")
 			let profile = document.createElement("img")
 			let header = document.createElement("p")
@@ -265,6 +292,7 @@ window.onload = function () {
 			block.setAttribute("data-deck-name", deck_name)
 
 			profile.src = currentUrl + 'assets/' + deck_name + "/profile.jpg"
+			profile.alt = "Cover of a deck of metaphorical cards";
 			profile.addEventListener("click", () => { click_fun(); })
 			
 			header.classList.add("header")
@@ -285,9 +313,6 @@ window.onload = function () {
 			desks_list.appendChild(block)
 		}
 	}
-
-	
-	build_decks()
 
 	function mix_image_id_array() {
 		const suffle = (array) => {
@@ -349,9 +374,7 @@ window.onload = function () {
 				},
 				modifiers: [
 					interact.modifiers.aspectRatio({
-					  // make sure the width is always double the height
 					  ratio: card_ration,
-					  // also restrict the size by nesting another modifier
 					  modifiers: [
 						interact.modifiers.restrictSize({ 
 							min: { width: min_width, height: min_width / card_ration },
