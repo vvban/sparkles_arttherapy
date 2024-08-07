@@ -352,6 +352,21 @@ window.onload = function () {
 				
 						event.target.style.transform = 
 							`translate(${position.x}px, ${position.y}px)`
+
+						// Sort by z-index and target set in front
+						let elements = Array.from(document.querySelectorAll(".draggable"));
+						elements = elements.sort((a, b) => {
+							let zIndexA = parseInt(window.getComputedStyle(a).zIndex) || 0;
+							let zIndexB = parseInt(window.getComputedStyle(b).zIndex) || 0;
+							return zIndexA - zIndexB;
+						});
+						let index = 1;
+						elements.forEach((element) => {
+							element.style.zIndex = index
+							index++ 
+						})
+
+						event.target.style.zIndex = index
 					}
 				},
 				modifiers: [snap100x100, restriction]
