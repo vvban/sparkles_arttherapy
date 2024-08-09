@@ -31,7 +31,6 @@ window.onload = function () {
 
 	let image_id_array = []
 
-
 	let deck_cards_modal = document.getElementById("deck-of-cards-modal");
 	let desks_list = document.getElementById("decks-list");
 	let deck_cards_modal_close_button = document.getElementById("deck-of-cards-modal-button-close");
